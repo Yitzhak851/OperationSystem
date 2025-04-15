@@ -1,0 +1,13 @@
+lecture-01:
+- First computers
+- Different typs of generation computers
+- Type of Multy-programing & Time-sharing computer.
+- The term: SPOOL (Simultaneous Peripheral Operation On-line...)
+- Terminology (Latency, Throughput, CPU-utilization, Overhead, CPU-usage...)
+- Thread of process - abstraction when CPU execution program
+- Address space
+- File
+- Process
+- Concurrency vs. Parallelism
+- Context Switch (Time sharing)
+- Multi-thread & Schedualing
