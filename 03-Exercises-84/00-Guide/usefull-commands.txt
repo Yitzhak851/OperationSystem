@@ -1,0 +1,39 @@
+https://github.com/Yitzhak851/OperationSystem.git
+
+mkdir -p /mnt/c/src/helloworld
+
+cd /mnt/c/src/
+
+cd /mnt/c/src/helloworld
+
+## Installing Build Tools in WSL ##
+* Back in your WSL terminal, run:
+        sudo apt update
+        sudo apt install -y build-essential gdb
+This installs:
+•	gcc — the GNU C compiler
+•	make
+•	gdb — the debugger
+
+## Compiling and Running the Program ##
+* In the WSL terminal:
+        gcc helloWorld.c -o helloWorld
+        ./helloWorld
+You should see:
+Hello, world!
+
+3.	Press F5 to debug
+
+Open PowerShell as Administrator
+
+    1) win + r ====> cmd + ent  =====> powershell Start-Process powershell -Verb runAs
+    
+    2) Right-click the Start menu → Windows PowerShell (Admin).
+
+
+## Install WSL with Ubuntu 24.04 using winget (Run the next commands at win-PowerShell as Admin) ##
+    winget install -e --id Microsoft.WSL
+    wsl --install -d Ubuntu-24.04
+
+
+
