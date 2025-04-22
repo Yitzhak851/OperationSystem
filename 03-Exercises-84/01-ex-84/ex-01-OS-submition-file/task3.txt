@@ -1,0 +1,34 @@
+#-------------------------------------------------------------------------------------------------------------------------------------------------------#
+#### Task 3 #### 
+
+Implement a condition variable. 
+This is a synchronization primitive that allows threads to wait until a particular condition is met. 
+Implement the functions in the provided cond var.h.
+
+Mandatory Functions:
+
+void condition_variable_init ( condition_variable * cv);
+/*
+* Initializes the condition variable pointed to by ’cv ’.
+*/
+
+void condition_variable_wait ( condition_variable * cv , ticket_lock * ext_lock );
+/*
+* Causes the calling thread to wait on the condition variable ’cv ’.
+* The thread should release the external lock ’ext_lock ’ while waiting and reacquire it before returning .
+*/
+
+void condition_variable_signal ( condition_variable * cv);
+/*
+* Wakes up one thread waiting on the condition variable ’cv ’.
+*/
+
+void condition_variable_broadcast ( condition_variable * cv);
+/*
+* Wakes up all threads waiting on the condition variable ’cv ’.
+*/
+
+Listing 4: Mandatory functions for Task 3
+Submit your implementation in cond var.c and any additional files (if there are any).
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------#

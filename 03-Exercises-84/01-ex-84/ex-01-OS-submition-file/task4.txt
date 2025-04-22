@@ -1,0 +1,39 @@
+#-------------------------------------------------------------------------------------------------------------------------------------------------------#
+#### Task 4 #### 
+
+Implement a read-write lock that allows multiple readers or a single writer in the mutual exclusion section.
+Implement the functions in the provided rw lock.h.
+Mandatory Functions:
+
+void rwlock_init ( rwlock * lock );
+/*
+* Initializes the read - write lock .
+*/
+
+void rwlock_acquire_read ( rwlock * lock );
+/*
+* Acquires the lock for reading .
+*/
+
+void rwlock_release_read ( rwlock * lock );
+/*
+* Releases the lock after reading .
+*/
+
+void rwlock_acquire_write ( rwlock * lock );
+/*
+* Acquires the lock for writing . This operation should ensure exclusive access .
+*/
+
+void rwlock_release_write ( rwlock * lock );
+/*
+* Releases the lock after writing .
+*/
+
+Listing 5: Mandatory functions for Task 4
+Hints:
+• Consider fairness and prevent writer starvation.
+• You may use your previously implemented synchronization primitives.
+Submit your implementation in rw lock.c and any additional files (if there are any).
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------#
