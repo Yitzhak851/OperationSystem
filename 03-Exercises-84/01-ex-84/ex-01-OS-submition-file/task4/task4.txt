@@ -2,7 +2,7 @@
 #### Task 4 #### 
 
 Implement a read-write lock that allows multiple readers or a single writer in the mutual exclusion section.
-Implement the functions in the provided rw lock.h.
+Implement the functions in the provided rw_lock.h
 Mandatory Functions:
 
 void rwlock_init ( rwlock * lock );

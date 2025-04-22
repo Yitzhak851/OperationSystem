@@ -1,78 +1,6 @@
-#-------------------------------------------------------------------------------------------------------------------------------------------------------#
-#### Task 5 #### 
-
-Objective: 
-Implement a thread-local storage (TLS) mechanism using a statically allocated array. 
-This TLS must reside in the data segment (i.e., no dynamic memory allocation) and you must not use C11 or compiler-specific thread-local keywords (e.g., thread or Thread local).
-Important: 
-The TLS resides within the global variable g tls which is the array that holds the TLS entries. 
-For simplicity we are limiting the size of the array, so you don’t need to do any dynamic allocations.
-
-Details:
-• Structure: Define a structure tls data t as follows:
-
-# include <stdint .h>
-# include <pthread .h>
-
-# define MAX_THREADS 100
-
-typedef struct {
-    int64_t thread_id ; // For an unused entry , initialize to -1
-    void * data ; // Initialize to NULL
-} tls_data_t ;
-
-• g tls is an array of tls entry t, which holds the thread ID and a void* pointer that points to the data.
-• Initialize g tls so that all thread id fields are set to -1 and all data pointers are NULL, so we will know all the entries are not usable by any thread.
-• When initializing TLS for a thread:
-– Search g tls for the first empty slot and set the thread ID (using pthread self()).
-– If the thread ID already exists, simply return.
-– If the TLS is full, print:
-thread [thread id] failed to initialize, not enough space
-exit with return code 1 with exit(1).
-– Search should have a runtime complexity of O(n).
-• When setting data (i.e. void*) to the TLS, find the entry corresponding to the calling thread and
-update its data.
-• When retrieving data, find the relevant entry in the TLS and return the data.
-• if the thread’s entry is not found durting get or set operations, print:
-thread [thread id] hasn’t been initialized in the TLS
-exit with return code 2 with exit(2).
-• To free a TLS entry, reset the thread id to -1 and data to NULL.
-• Important: Ensure that the mapping and TLS updates are mutuality excluded using your own
-synchronization mechanisms.
-• Important: If the data points to a variable on the stack, the pointer will become dangling if the
-variable goes out of scope. For your tests, you may also use malloc to provide a void* to data on the
-heap, but notice, once you free the data, the pointer in the TLS dangles. Both pointers to variables on
-the stack and on the heap must work. You cannot assume in the TLS anything about the void* data.
-Mandatory Definitions and Functions:
-
-void init_storage ();
-/*
-* Initializes g_tls as an array of MAX_THREADS entries .
-*/
-
-void tls_thread_alloc ();
-// Initializes the TLS entry for the calling thread .
-
-void * get_tls_data ( void );
-/*
-* Returns a pointer to the arbitrary data stored for the calling thread .
-*/
-
-void set_tls_data ( void * data );
-/*
-* Sets the given void * data to the TLS for the calling thread .
-*/
-
-void tls_thread_free ();
-// Frees the TLS entry for the calling thread .
-Listing 6: Mandatory Definitions and Functions for Task 5
-
-Submit your implementation in local storage.c and any additional files (if there are any).
-#-------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------#
-
-Task 6
+#### Task 6 #### 
 Objective: Implement a Producer-Consumer pattern program that checks if numbers are divisible by 6.
 Detailed Requirements:
 • Producers:
@@ -147,8 +75,10 @@ Mandatory Functions:
 21 * wait until queue is empty , if queue is already empty
 22 * return immediately without waiting .
 23 */
-Listing 7: Mandatory functions for Task 6
-Submit your implementation in cp pattern.c and any additional files (if there are any).
+Listing 7: 
+Mandatory functions for Task 6
+Submit your implementation in cp_pattern.c 
+and any additional files (if there are any).
 Final Notes
 • Read the Instructions Carefully: Ensure that you adhere to all restrictions and requirements.
 • Testing: Test your code thoroughly with various inputs to ensure correctness, especially under concurrent

@@ -1,34 +1,28 @@
 
 #### Task 2 #### 
 Implement a semaphore using the Ticket Lock mechanism presented in class. 
-Implement the functions in the provided tl semaphore.h.
+Implement the functions in the provided tl_semaphore.h
 
 Mandatory Functions:
-
 void semaphore_init ( semaphore * sem , int initial_value );
 /*
 * Initializes the semaphore with an initial value .
 */
-
 void semaphore_wait ( semaphore * sem); // Decrement the semaphore value ( wait operation )
-
 void semaphore_signal ( semaphore * sem); // Increment the semaphore value ( signal operation )
 
 Listing 2: Mandatory functions for Task 2
 Ticket Lock From Lecture
-
 typedef struct
 {
     atomic_int ticket ;
     atomic_int cur_ticket ;
 } ticket_lock ;
-
 void ticketlock_init ( ticket_lock * lock )
 {
     atomic_init (& lock ->ticket , 0);
     atomic_init (& lock -> cur_ticket , 0);
 }
-
 void ticketlock_acquire ( ticket_lock * lock )
 {
     // get my ticket

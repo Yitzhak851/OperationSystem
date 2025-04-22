@@ -24,12 +24,16 @@ Hello, world!
 
 3.	Press F5 to debug
 
-Open PowerShell as Administrator
+#####################################################################################
+############ ------------ Open PowerShell as Administrator  ------------ ############
+#####################################################################################
 
     1) win + r ====> cmd + ent  =====> powershell Start-Process powershell -Verb runAs
     
     2) Right-click the Start menu → Windows PowerShell (Admin).
 
+#####################################################################################
+#####################################################################################
 
 ## Install WSL with Ubuntu 24.04 using winget (Run the next commands at win-PowerShell as Admin) ##
     winget install -e --id Microsoft.WSL

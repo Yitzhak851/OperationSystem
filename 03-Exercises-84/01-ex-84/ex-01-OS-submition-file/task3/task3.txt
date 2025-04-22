@@ -3,7 +3,7 @@
 
 Implement a condition variable. 
 This is a synchronization primitive that allows threads to wait until a particular condition is met. 
-Implement the functions in the provided cond var.h.
+Implement the functions in the provided cond_var.h
 
 Mandatory Functions:
 
