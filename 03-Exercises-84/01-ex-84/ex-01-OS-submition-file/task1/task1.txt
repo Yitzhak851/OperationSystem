@@ -8,9 +8,6 @@ Implement the functions in the provided tas_semaphore.h
 
 Mandatory Functions:
 void semaphore_init ( semaphore * sem , int initial_value );
-/*
-* Initializes the semaphore pointed to by ’sem ’ with the specified initial value .
-*/
 void semaphore_wait ( semaphore * sem); // Decrement the semaphore value ( wait operation )
 void semaphore_signal ( semaphore * sem); // Increment the semaphore value ( signal operation )
 

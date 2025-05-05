@@ -15,14 +15,14 @@ This installs:
 •	make
 •	gdb — the debugger
 
-## Compiling and Running the Program ##
-* In the WSL terminal:
-        gcc helloWorld.c -o helloWorld
-        ./helloWorld
-You should see:
-Hello, world!
-
-3.	Press F5 to debug
+#####################################################################################
+############ ------------ Compiling and Running the Program  ------------ ############
+#####################################################################################
+        * In the WSL terminal:
+                1)      gcc helloWorld.c -o helloWorld          OR      gcc gradeList.c -Wall -D TEST_1_1 -o test_ex6_1_1
+                2)      ./helloWorld
+                                You should see: Hello, world!
+                3)	Press F5 to debug
 
 #####################################################################################
 ############ ------------ Open PowerShell as Administrator  ------------ ############

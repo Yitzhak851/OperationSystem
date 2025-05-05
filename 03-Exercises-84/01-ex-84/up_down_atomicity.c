@@ -20,12 +20,12 @@ struct args2
 
 void *thread_function(void *arg)
 {
-    struct args *args = (struct args*)arg;
-    for(int i = 0; i < TIMES; i++)
+    struct args *args = (struct args *)arg;
+    for (int i = 0; i < TIMES; i++)
     {
         semaphore_signal(args->sem);
     }
-    for(int i = 0; i < TIMES; i++)
+    for (int i = 0; i < TIMES; i++)
     {
         semaphore_wait(args->sem);
     }
@@ -34,7 +34,7 @@ void *thread_function(void *arg)
 
 void *thread_function2(void *arg)
 {
-    struct args2 *args = (struct args2*)arg;
+    struct args2 *args = (struct args2 *)arg;
     args->inside = 0;
     semaphore_wait(args->sem); // should cause deadlock
     args->inside = 1;
@@ -49,14 +49,14 @@ int main(void)
     pthread_t threads[THREADS];
     struct args args[THREADS];
 
-    for(int i = 0; i < THREADS; i++)
+    for (int i = 0; i < THREADS; i++)
     {
         args[i].sem = &sem;
         args[i].inside = 0;
-        pthread_create(&threads[i], NULL, thread_function, (void*)&args[i]);
+        pthread_create(&threads[i], NULL, thread_function, (void *)&args[i]);
     }
 
-    for(int i = 0; i < THREADS; i++)
+    for (int i = 0; i < THREADS; i++)
     {
         pthread_join(threads[i], NULL);
     }
@@ -66,10 +66,10 @@ int main(void)
     args2.sem = &sem;
     args2.inside = 0;
     pthread_t thread;
-    pthread_create(&thread, NULL, thread_function2, (void*)&args2);
+    pthread_create(&thread, NULL, thread_function2, (void *)&args2);
     sleep(1);
     pthread_cancel(thread);
-    if(args2.inside != 0)
+    if (args2.inside != 0)
     {
         printf("Value is %d\n", args2.inside);
         fprintf(stderr, "semaphore_no_signal_wait_atomicity");
