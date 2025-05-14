@@ -1,29 +1,25 @@
 #include "cond_var.h"
 
-/*
- * TODO: Implement condition_variable_init.
- */
 void condition_variable_init(condition_variable* cv) {
-    // TODO: Initialize internal fields.
+    atomic_flag_clear(&cv->lock);
+    atomic_init(&cv->waiter_count, 0); 
 }
 
-/*
- * TODO: Implement condition_variable_wait.
- */
 void condition_variable_wait(condition_variable* cv, ticket_lock* ext_lock) {
-    // TODO: Increase waiter count, release ext_lock, wait until signaled, then reacquire ext_lock.
+    while (atomic_flag_test_and_set(&cv->lock)) { } // spin
+    cv->waiter_count++;  // increment thread
+    atomic_flag_clear(&cv->lock); // release
+    while (1) { } // wait until some thread wake up
 }
 
-/*
- * TODO: Implement condition_variable_signal.
- */
 void condition_variable_signal(condition_variable* cv) {
-    // TODO: Signal one waiting thread.
+    while (atomic_flag_test_and_set(&cv->lock)) { } //spin
+    if (cv->waiter_count > 0) { cv->waiter_count--; }
+    atomic_flag_clear(&cv->lock);
 }
 
-/*
- * TODO: Implement condition_variable_broadcast.
- */
 void condition_variable_broadcast(condition_variable* cv) {
-    // TODO: Signal all waiting threads.
+    while (atomic_flag_test_and_set(&cv->lock)) { /* spin */ }
+    cv->waiter_count = 0;
+    atomic_flag_clear(&cv->lock)
 }

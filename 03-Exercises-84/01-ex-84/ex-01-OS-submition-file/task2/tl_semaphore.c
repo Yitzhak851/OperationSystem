@@ -1,22 +1,22 @@
 #include "tl_semaphore.h"
+#include <stdatomic.h> // For atomic operations
+#include <sched.h>  // For sched_yield
+#include <stdio.h>  // For printf (optional, for debugging)
 
-/*
- * TODO: Implement semaphore_init for the Ticket Lock semaphore.
- */
 void semaphore_init(semaphore* sem, int initial_value) {
-    // TODO: Define the structure and initialize the semaphore.
+    atomic_init(&sem->ticket, 0);
+    atomic_init(&sem->cur_ticket, 0);
+    sem->value = initial_value; 
 }
 
-/*
- * TODO: Implement semaphore_wait using the Ticket Lock mechanism.
- */
 void semaphore_wait(semaphore* sem) {
-    // TODO: Obtain a ticket and wait until it is your turn; then decrement the semaphore value.
+    int my_ticket = atomic_fetch_add(&sem->ticket, 1); // get my ticket
+    while (atomic_load(&sem->cur_ticket) != my_ticket){} // wait until is my turn
+    while (sem->value <= 0) {} // wait until a resource is availble
+    sem->value--;
+    atomic_fetch_add(&sem->ticket, 1); // advance to next turn
 }
 
-/*
- * TODO: Implement semaphore_signal using the Ticket Lock mechanism.
- */
 void semaphore_signal(semaphore* sem) {
-    // TODO: Increment the semaphore value and allow the next ticket holder to proceed.
+    atomic_fetch_add(&sem->ticket, 1);
 }

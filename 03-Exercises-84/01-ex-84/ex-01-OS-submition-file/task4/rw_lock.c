@@ -1,36 +1,34 @@
 #include "rw_lock.h"
 
-/*
- * TODO: Implement rwlock_init.
- */
 void rwlock_init(rwlock* lock) {
-    // TODO: Initialize the lock structure.
+    atomic_flag_clear(&lock->lock);
+    atomic_init(&lock->readers, 0);
 }
 
-/*
- * TODO: Implement rwlock_acquire_read.
- */
 void rwlock_acquire_read(rwlock* lock) {
-    // TODO: Allow multiple readers while ensuring no writer is active.
+    // if now we at write lock, we need to wait TODO: add mutex
+    if (atomic_flag_test_and_set(&lock->lock)) {
+        while (atomic_flag_test_and_set(&lock->lock)) { /* spin */ }
+    }
+    // if we are not in write lock, we can increase the reader count   
+    // and release the lock
+    while (atomic_flag_test_and_set(&lock->lock)) { /* spin */ }
+    lock->readers++;
+    atomic_flag_clear(&lock->lock);
 }
 
-/*
- * TODO: Implement rwlock_release_read.
- */
 void rwlock_release_read(rwlock* lock) {
-    // TODO: Decrement the reader count.
+    while (atomic_flag_test_and_set(&lock->lock)) { /* spin */ }
+    lock->readers--;
+    atomic_flag_clear(&lock->lock);
 }
 
-/*
- * TODO: Implement rwlock_acquire_write.
- */
 void rwlock_acquire_write(rwlock* lock) {
-    // TODO: Ensure exclusive access for writing.
+    while (atomic_flag_test_and_set(&lock->lock)) { /* spin */ }
+    while (lock->readers > 0) { /*TODO - add mutex */}
+    atomic_flag_clear(&lock->lock);
 }
 
-/*
- * TODO: Implement rwlock_release_write.
- */
 void rwlock_release_write(rwlock* lock) {
     // TODO: Release the write lock.
 }
