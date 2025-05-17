@@ -1,22 +1,32 @@
 #ifndef TAS_SEMAPHORE_H
 #define TAS_SEMAPHORE_H
 
-#include <stdatomic.h>
-#include <sched.h>
-#include <stdio.h>
+#include <stdatomic.h> // This header file provides atomic operations.
 
+/*
+ * Define the semaphore type.
+ * Write your struct details in this file..
+ */
 typedef struct {
-    atomic_int lock;
-    atomic_int value;
-} semaphore ;
+    // write your implementation here
+    atomic_int value; // Semaphore's value
+    atomic_flag lock; // Semaphore's lock
+} semaphore;
 
+
+/*
+ * Initializes the semaphore pointed to by 'sem' with the specified initial value.
+ */
 void semaphore_init(semaphore* sem, int initial_value);
-void semaphore_wait(semaphore* sem);
-void semaphore_signal(semaphore* sem);
 
-// more_fofo() 
-void spinlock_init(atomic_flag* lock);
-void spinlock_aquire(atomic_flag* lock);
-void spinlock_release(atomic_flag* lock);
+/*
+ * Decrements the semaphore (wait operation).
+ */
+void semaphore_wait(semaphore* sem);
+
+/*
+ * Increments the semaphore (signal operation).
+ */
+void semaphore_signal(semaphore* sem);
 
 #endif // TAS_SEMAPHORE_H

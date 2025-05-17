@@ -1,9 +1,10 @@
-#include <stdatomic.h>
+// ticket_lock.c
+#include <stdatomic.h> // This header file provides atomic operations.
+#include <sched.h> // This header file provides the sched_yield function for yielding the CPU.
+#include <pthread.h> // This header file provides the pthread_yield function for yielding the CPU.
 
-typedef struct {
-    atomic_int ticket;
-    atomic_int cur_ticket;
-} ticket_lock;
+#include "ticket_lock.h" // This is the header file for the ticket lock implementation.
+#include "tl_semaphore.h" // This is the header file for the Ticket Lock semaphore implementation.
 
 /* 
  * Initializes the ticket lock.

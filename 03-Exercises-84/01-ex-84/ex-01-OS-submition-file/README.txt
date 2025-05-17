@@ -1,3 +1,7 @@
-submitting students’ information.  Each line should follow this format: First name, Last name, Student ID
-Yitzhak	, Bar or, 208837278
-Alon	, Cory	, XXXXXXXXX
+## Submitting students information: ##
+
+Each line should follow this format: 
+[First_name] , [Last_name] , [Student_ID]
+
+(1) Alon	, Cory	, 319056198
+(2) Yitzhak	, Bar or, 208837278
